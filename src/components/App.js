@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../utils/api';
-import { CurrentUserContext } from './../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -18,7 +19,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userData, cardsData]) => {
@@ -109,15 +109,27 @@ function App() {
 
         <Header />
 
-        <Main
-          cards={cards}
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
+        <Switch>
+
+          <Route path="/">
+            <Main
+              cards={cards}
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />
+          </Route>
+
+          <Route path="/sign-up">
+          </Route>
+
+          <Route path="/sign-in">
+          </Route>
+
+        </Switch>
 
         <Footer />
 
@@ -148,7 +160,7 @@ function App() {
         />
 
       </div>
-    </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider >
   );
 }
 
