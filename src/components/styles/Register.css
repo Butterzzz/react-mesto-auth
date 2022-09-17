@@ -1,0 +1,26 @@
+.register__signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFF;
+}
+
+.register__signin p {
+    margin: 0 6px 0 0;
+}
+
+.register__login-link {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.register__login-link:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}

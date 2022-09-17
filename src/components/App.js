@@ -10,6 +10,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from "./ImagePopup";
+import Register from './Register';
 
 function App() {
 
@@ -125,6 +126,7 @@ function App() {
           </Route>
 
           <Route path="/sign-up">
+            <Register />
           </Route>
 
           <Route path="/sign-in">
