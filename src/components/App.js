@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
+import Login from './Login';
 import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -111,7 +112,7 @@ function App() {
 
         <Switch>
 
-          <Route path="/">
+          <Route exact path="/">
             <Main
               cards={cards}
               onEditAvatar={handleEditAvatarClick}
@@ -127,6 +128,7 @@ function App() {
           </Route>
 
           <Route path="/sign-in">
+            <Login />
           </Route>
 
         </Switch>
