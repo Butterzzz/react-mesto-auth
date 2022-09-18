@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Login from './Login';
+import Register from './Register';
 import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
-import ImagePopup from "./ImagePopup";
-import Register from './Register';
+import ImagePopup from './ImagePopup';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
 
@@ -21,6 +22,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  function onLogin() {
+    setLoggedIn(false);
+  }
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userData, cardsData]) => {
@@ -113,24 +119,29 @@ function App() {
 
         <Switch>
 
-          <Route exact path="/">
-            <Main
-              cards={cards}
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-            />
-          </Route>
+          <ProtectedRoute
+            exact path="/"
+            loggedIn={loggedIn}
+            cards={cards}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            compomnent={Main}
+          />
 
           <Route path="/sign-up">
             <Register />
           </Route>
 
           <Route path="/sign-in">
-            <Login />
+            <Login onLogin={onLogin} />
+          </Route>
+
+          <Route>
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           </Route>
 
         </Switch>
