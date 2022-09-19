@@ -6,6 +6,7 @@ import Header from './Header';
 import Main from './Main';
 import Login from './Login';
 import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -18,6 +19,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isInfooTooltipOpen, setIsInfooTooltipOpen] = useState(true);
+  const [isSuccess, SetIsSuccess] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -27,6 +30,12 @@ function App() {
   function onLogin() {
     setLoggedIn(false);
   }
+
+  function handleInfooTooltipClick() {
+    setIsInfooTooltipOpen(true);
+  }
+
+
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userData, cardsData]) => {
@@ -55,6 +64,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsInfooTooltipOpen(false);
     setSelectedCard(null);
   }
 
@@ -172,6 +182,14 @@ function App() {
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
+        />
+
+        <InfoTooltip
+          isOpen={isInfooTooltipOpen}
+          onClose={closeAllPopups}
+          isSuccess={isSuccess}
+          successText="Вы успешно зарегистрировались!"
+          failedText="Что-то пошло не так! Попробуйте ещё раз."
         />
 
       </div>

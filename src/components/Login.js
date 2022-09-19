@@ -10,7 +10,7 @@ function Login() {
                     <input name="email" id="email-input" type="email" placeholder="Email" required />
                     <input name="password" id="password-input" type="password" placeholder="Пароль" required />
                 </fieldset>
-                <div class="login__button-container">
+                <div className="login__button-container">
                     <button className="login__link" type="submit">Войти</button>
                 </div>
             </form>
