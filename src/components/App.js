@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Login from './Login';
@@ -13,26 +13,24 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import ProtectedRoute from './ProtectedRoute';
+import * as auth from '../utils/auth';
 
 function App() {
 
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isInfooTooltipOpen, setIsInfooTooltipOpen] = useState(true);
-  const [isSuccess, SetIsSuccess] = useState(true);
+  const [isInfooTooltipOpen, setIsInfooTooltipOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
 
   function onLogin() {
     setLoggedIn(false);
-  }
-
-  function handleInfooTooltipClick() {
-    setIsInfooTooltipOpen(true);
   }
 
 
@@ -121,6 +119,21 @@ function App() {
       .finally(() => { setIsLoading(false); })
   }
 
+
+
+  function onRegister(password, email) {
+    auth.register(password, email)
+      .then(data => {
+        if (data) {
+          setIsSuccess(true);
+          setIsInfooTooltipOpen(true);
+          history.push('/sign-in');
+        }
+      })
+      .catch(err => console.log(err));
+    setIsSuccess(false);
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -143,11 +156,13 @@ function App() {
           />
 
           <Route path="/sign-up">
-            <Register />
+            <Register
+              onRegister={onRegister} />
           </Route>
 
           <Route path="/sign-in">
-            <Login onLogin={onLogin} />
+            <Login
+              onLogin={onLogin} />
           </Route>
 
           <Route>
