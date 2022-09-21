@@ -27,6 +27,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -133,6 +134,7 @@ function App() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           setLoggedIn(true);
+          setEmail(email);
           history.push('/');
         }
       })
@@ -147,6 +149,7 @@ function App() {
         .then(res => {
           if (res) {
             setLoggedIn(true);
+            setEmail(res.data.email);
             history.push('/');
           }
         })
@@ -154,11 +157,20 @@ function App() {
     }
   }, [history])
 
+  function signOut() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    history.push('/sign-in');
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
-        <Header />
+        <Header
+          email={email}
+          signOut={signOut}
+        />
 
         <Switch>
 
