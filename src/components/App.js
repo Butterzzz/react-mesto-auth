@@ -130,13 +130,29 @@ function App() {
   function onLogin(password, email) {
     auth.authorize(password, email)
       .then(data => {
-        if (data) {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
           setLoggedIn(true);
           history.push('/');
         }
       })
       .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      auth.getContent(token)
+        .then(res => {
+          if (res) {
+            setLoggedIn(true);
+            history.push('/');
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  }, [history])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
