@@ -29,12 +29,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
 
-  function onLogin() {
-    setLoggedIn(false);
-  }
-
-
-
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userData, cardsData]) => {
       setCurrentUser(userData);
@@ -131,7 +125,17 @@ function App() {
         }
       })
       .catch(err => console.log(err));
-    setIsSuccess(false);
+  };
+
+  function onLogin(password, email) {
+    auth.authorize(password, email)
+      .then(data => {
+        if (data) {
+          setLoggedIn(true);
+          history.push('/');
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -152,7 +156,7 @@ function App() {
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
-            compomnent={Main}
+            component={Main}
           />
 
           <Route path="/sign-up">
@@ -165,7 +169,7 @@ function App() {
               onLogin={onLogin} />
           </Route>
 
-          <Route>
+          <Route path="*">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           </Route>
 
