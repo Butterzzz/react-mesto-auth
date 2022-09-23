@@ -15,7 +15,7 @@ function Login({ onLogin }) {
     }
 
     function handleSubmit(evt) {
-        evt.preventDefault()
+        evt.preventDefault();
 
         onLogin(password, email);
         setEmail('');

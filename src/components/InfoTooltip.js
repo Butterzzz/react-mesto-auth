@@ -3,7 +3,9 @@ import success from '../images/success.svg';
 import fail from '../images/fail.svg';
 import './styles/InfoTooltip.css';
 
-function InfoTooltip({ isOpen, onClose, isSuccess, successText, failedText }) {
+function InfoTooltip({ isOpen, onClose, isSuccess }) {
+    const successText="Вы успешно зарегистрировались!";
+    const failedText="Что-то пошло не так! Попробуйте ещё раз.";
 
     return (
         <div className={`popup popup_type_info-tooltip ${isOpen && "popup_opened"}`}>

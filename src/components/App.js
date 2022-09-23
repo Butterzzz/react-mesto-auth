@@ -114,18 +114,20 @@ function App() {
       .finally(() => { setIsLoading(false); })
   }
 
-
-
   function onRegister(password, email) {
     auth.register(password, email)
       .then(data => {
-        if (data) {
+        if (data.data._id) {
           setIsSuccess(true);
           setIsInfooTooltipOpen(true);
           history.push('/sign-in');
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        setIsSuccess(false);
+        setIsInfooTooltipOpen(true);
+        console.log(err)
+      })
   };
 
   function onLogin(password, email) {
@@ -138,7 +140,7 @@ function App() {
           history.push('/');
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => { console.log(err) })
   };
 
   useEffect(() => {
@@ -235,8 +237,6 @@ function App() {
           isOpen={isInfooTooltipOpen}
           onClose={closeAllPopups}
           isSuccess={isSuccess}
-          successText="Вы успешно зарегистрировались!"
-          failedText="Что-то пошло не так! Попробуйте ещё раз."
         />
 
       </div>
