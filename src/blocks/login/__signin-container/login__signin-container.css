@@ -1,4 +1,4 @@
-.register__signin {
+.login__signin-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,16 +11,6 @@
     color: #FFF;
 }
 
-.register__signin p {
+.login__signin-container p {
     margin: 0 6px 0 0;
-}
-
-.register__login-link {
-    color: #FFF;
-    text-decoration: none;
-}
-
-.register__login-link:hover {
-    cursor: pointer;
-    opacity: 0.6;
 }

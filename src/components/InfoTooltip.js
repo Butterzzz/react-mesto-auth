@@ -1,7 +1,6 @@
 import React from 'react';
 import success from '../images/success.svg';
 import fail from '../images/fail.svg';
-import './styles/InfoTooltip.css';
 
 function InfoTooltip({ isOpen, onClose, isSuccess }) {
     const successText="Вы успешно зарегистрировались!";
@@ -17,4 +16,5 @@ function InfoTooltip({ isOpen, onClose, isSuccess }) {
         </div>
     );
 }
+
 export default InfoTooltip;

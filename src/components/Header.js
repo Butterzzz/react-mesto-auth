@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLocation, Link } from "react-router-dom";
 import logo from '../images/header-logo.svg';
-import './styles/Header.css';
 
 function Header({ email, signOut }) {
 

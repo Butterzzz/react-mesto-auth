@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './styles/Register.css';
 
 function Register({ onRegister }) {
     const [email, setEmail] = useState('');
@@ -35,9 +34,9 @@ function Register({ onRegister }) {
                     <button className="login__link" type="submit">Зарегистрироваться</button>
                 </div>
             </form>
-            <div className="register__signin">
+            <div className="login__signin-container">
                 <p>Уже зарегистрированы?</p>
-                <Link to="/sign-in" className="register__login-link">Войти</Link>
+                <Link to="/sign-in" className="login__signin">Войти</Link>
             </div>
         </div>
     );
