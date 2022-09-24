@@ -8,8 +8,8 @@
   align-items: center;
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 934px){
   .header {
-    padding: 28px 0 31.6px 0;
+    padding: 28px 30px 31.6px 30px;
   }
 }
