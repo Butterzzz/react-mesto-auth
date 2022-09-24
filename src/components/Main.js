@@ -12,17 +12,17 @@ function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onC
             <section className="profile">
 
                 <img className="profile__image" src={avatar} alt="Изображение профиля" />
-                <button className="profile__button profile__button_action_edit-avatar" type="button" aria-label="Редактировать аватар" onClick={onEditAvatar}></button>
+                <button className="profile__button profile__button_action_edit-avatar" type="button" aria-label="Редактировать аватар" onClick={onEditAvatar} />
 
                 <div className="profile__info">
                     <h1 className="profile__name">{name}</h1>
                     <button className="profile__button profile__button_action_edit" type="button"
-                        aria-label="Редактировать профиль" onClick={onEditProfile}></button>
+                        aria-label="Редактировать профиль" onClick={onEditProfile} />
                     <p className="profile__about">{about}</p>
                 </div>
 
                 <button className="profile__button profile__button_action_add" type="button"
-                    aria-label="Добавить фотографию" onClick={onAddPlace}></button>
+                    aria-label="Добавить фотографию" onClick={onAddPlace} />
 
             </section>
 

@@ -30,11 +30,11 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
                 <div className="card__description">
                     <h2 className="card__title">{card.name}</h2>
                     <div className="card__like-container">
-                        <button className={cardLikeButtonClassName} type="button" aria-label="Поставить лайк" onClick={handleLikeClick}></button>
+                        <button className={cardLikeButtonClassName} type="button" aria-label="Поставить лайк" onClick={handleLikeClick} />
                         <div className="card__like-counter">{card.likes.length}</div>
                     </div>
                 </div>
-                <button className={cardDeleteButtonClassName} type="button" aria-label="Удалить карточку" onClick={handleDeleteClick}></button>
+                <button className={cardDeleteButtonClassName} type="button" aria-label="Удалить карточку" onClick={handleDeleteClick} />
             </article>
         </li>
     )

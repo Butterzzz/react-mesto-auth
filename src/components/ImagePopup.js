@@ -8,7 +8,7 @@ function ImagePopup({ card, name, onClose }) {
           <img className="popup__image" src={card && card.link} alt={card && card.name} />
           <figcaption className="popup__image-caption">{card && card.name}</figcaption>
         </figure>
-        <button className="popup__button popup__button_action_close" type="button" aria-label="Закрыть окно просмотра" onClick={onClose}></button>
+        <button className="popup__button popup__button_action_close" type="button" aria-label="Закрыть окно просмотра" onClick={onClose} />
       </div>
     </div>
   );
