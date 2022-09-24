@@ -229,6 +229,7 @@ function App() {
         />
 
         <ImagePopup
+          name={'photo-view'}
           card={selectedCard}
           onClose={closeAllPopups}
         />
