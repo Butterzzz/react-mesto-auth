@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import PageWithForm from './PageWithForm';
 
-function Login({ onLogin }) {
+function Login({ onLogin, isLoading }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,19 +23,32 @@ function Login({ onLogin }) {
     }
 
     return (
-        <div className="login">
-            <h2 className="login__heading">Вход</h2>
-            <form className="login__form" onSubmit={handleSubmit} noValidate>
-                <fieldset className="login__input-container">
-                    <input name="email" id="email-input" type="email" placeholder="Email" value={email} onChange={handleEmailInput} required />
-                    <input name="password" id="password-input" type="password" placeholder="Пароль" value={password} onChange={handlePasswordInput} required />
-                </fieldset>
-                <div className="login__button-container">
-                    <button className="login__link" type="submit">Войти</button>
-                </div>
-            </form>
-        </div>
-    );
+        <PageWithForm
+            title='Вход'
+            onSubmit={handleSubmit}
+            submitText={isLoading ? 'Вход...' : 'Войти'}
+            isRegister={false}
+        >
+            <fieldset className="login__input-container">
+                <input
+                    name="email"
+                    id="email-input"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleEmailInput}
+                    required />
+                <input name="password"
+                    id="password-input"
+                    type="password"
+                    placeholder="Пароль"
+                    value={password}
+                    onChange={handlePasswordInput}
+                    required />
+            </fieldset>
+
+        </PageWithForm>
+    )
 }
 
 export default Login;

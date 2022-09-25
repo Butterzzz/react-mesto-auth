@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import PageWithForm from './PageWithForm';
 
-function Register({ onRegister }) {
+function Register({ onRegister, isLoading }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,23 +23,33 @@ function Register({ onRegister }) {
     }
 
     return (
-        <div className="login">
-            <h2 className="login__heading">Регистрация</h2>
-            <form className="login__form" onSubmit={handleSubmit} noValidate>
-                <fieldset className="login__input-container">
-                    <input name="email" id="email-input" type="email" placeholder="Email" value={email} onChange={handleEmailInput} required />
-                    <input name="password" id="password-input" type="password" placeholder="Пароль" value={password} onChange={handlePasswordInput} required />
-                </fieldset>
-                <div className="login__button-container">
-                    <button className="login__link" type="submit">Зарегистрироваться</button>
-                </div>
-            </form>
-            <div className="login__signin-container">
-                <p>Уже зарегистрированы?</p>
-                <Link to="/sign-in" className="login__signin">Войти</Link>
-            </div>
-        </div>
-    );
+        <PageWithForm
+            title='Регистрация'
+            onSubmit={handleSubmit}
+            submitText={isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
+            isRegister={true}
+        >
+            <fieldset className="login__input-container">
+                <input
+                    name="email"
+                    id="email-input"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleEmailInput}
+                    required />
+                <input
+                    name="password"
+                    id="password-input"
+                    type="password"
+                    placeholder="Пароль"
+                    value={password}
+                    onChange={handlePasswordInput}
+                    required />
+            </fieldset>
+
+        </PageWithForm>
+    )
 }
 
 export default Register;

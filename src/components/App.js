@@ -117,6 +117,7 @@ function App() {
   }
 
   function onRegister(password, email) {
+    setIsLoading(true);
     auth.register(password, email)
       .then(data => {
         if (data.data._id) {
@@ -130,9 +131,13 @@ function App() {
         setIsInfooTooltipOpen(true);
         console.log(err)
       })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   function onLogin(password, email) {
+    setIsLoading(true);
     auth.authorize(password, email)
       .then(data => {
         if (data.token) {
@@ -142,7 +147,12 @@ function App() {
           history.push('/');
         }
       })
-      .catch((err) => { console.log(err) })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   useEffect(() => {
@@ -193,12 +203,16 @@ function App() {
 
           <Route path="/sign-up">
             <Register
-              onRegister={onRegister} />
+              onRegister={onRegister}
+              isLoading={isLoading}
+            />
           </Route>
 
           <Route path="/sign-in">
             <Login
-              onLogin={onLogin} />
+              onLogin={onLogin}
+              isLoading={isLoading}
+            />
           </Route>
 
           <Route path="*">
